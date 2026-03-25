@@ -105,9 +105,6 @@ mvn clean package
 ```
 
 ```bash
-git clone https://github.com/<TU_USUARIO>/<TU_REPO>.git
-cd <TU_REPO>
-
 # Terminal 1: math-service
 cd math-service
 mvn spring-boot:run
@@ -125,39 +122,7 @@ Probar desde el navegador:
 http://localhost:8081/
 ```
 
----
-
-## 5. Despliegue en AWS EC2 (resumen)
-
-1. Crear **tres** instancias EC2 (Amazon Linux 2):
-	 - EC2 A y B: `math-service`.
-	 - EC2 C: `proxy-service` + cliente web.
-2. Instalar Java 17 y Maven en cada instancia (ver guía de Corretto 17 de AWS).
-3. En EC2 A y B:
-
-	 ```bash
-	 git clone https://github.com/<TU_USUARIO>/<TU_REPO>.git
-	 cd <TU_REPO>/math-service
-	 mvn package
-	 java -jar target/math-service-0.0.1-SNAPSHOT.jar
-	 ```
-
-4. En EC2 C (proxy):
-
-	 ```bash
-	 git clone https://github.com/<TU_USUARIO>/<TU_REPO>.git
-	 cd <TU_REPO>/proxy-service
-	 mvn package
-
-	 export MATH_SERVICE_URL_1=http://<IP_PRIVADA_MATH_1>:8080
-	 export MATH_SERVICE_URL_2=http://<IP_PRIVADA_MATH_2>:8080
-	 java -jar target/proxy-service-0.0.1-SNAPSHOT.jar --server.port=8081
-	 ```
-
-5. Abrir en el navegador la IP pública de la instancia del proxy:
-
-```text
-http://<IP_PUBLICA_PROXY>:8081/
+LICA_PROXY>:8081/
 ```
 
 Con esto se cumple:
