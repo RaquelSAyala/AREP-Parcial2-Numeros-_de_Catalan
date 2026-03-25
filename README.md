@@ -99,22 +99,34 @@ Para compilar ambos servicios desde la raíz del proyecto:
 ```bash
 cd math-service
 mvn clean package
+```
+<img width="1502" height="145" alt="Screenshot 2026-03-25 151100" src="https://github.com/user-attachments/assets/30bf5a48-173b-4b31-8f2b-321fb78f5687" />
 
+```bash
 cd ../proxy-service
 mvn clean package
 ```
+<img width="1474" height="556" alt="Screenshot 2026-03-25 151632" src="https://github.com/user-attachments/assets/81c0eaed-34bc-41b3-a7da-792ce8f22b73" />
+
 
 ```bash
 # Terminal 1: math-service
 cd math-service
 mvn spring-boot:run
+```
+<img width="1505" height="715" alt="Screenshot 2026-03-25 151840" src="https://github.com/user-attachments/assets/9ffe606d-26e1-452b-84c1-d09bf828c612" />
 
+```bash
 # Terminal 2: proxy-service
 cd ../proxy-service
-export MATH_SERVICE_URL_1=http://localhost:8080
-export MATH_SERVICE_URL_2=http://localhost:8080
-mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
+$env:MATH_SERVICE_URL_1="http://localhost:8080"
+$env:MATH_SERVICE_URL_2="http://localhost:8080"
+mvn spring-boot:run "-Dspring-boot.run.arguments=--server.port=8081"
 ```
+<img width="1164" height="49" alt="Screenshot 2026-03-25 152002" src="https://github.com/user-attachments/assets/5a7d12ad-53bc-4a94-b16b-6d62c42abc7e" />
+
+<img width="1486" height="735" alt="Screenshot 2026-03-25 152028" src="https://github.com/user-attachments/assets/6aa869cd-dbbc-4865-a7ab-c1488f4ae5e6" />
+
 
 Probar desde el navegador:
 
@@ -122,12 +134,32 @@ Probar desde el navegador:
 http://localhost:8081/
 ```
 
-LICA_PROXY>:8081/
-```
+<img width="1919" height="324" alt="Screenshot 2026-03-25 152059" src="https://github.com/user-attachments/assets/5ffe0c86-4aaf-424c-985e-ade6c54245cc" />
 
-Con esto se cumple:
-- Cálculo de Números de Catalan con programación dinámica y `BigInteger`.
-- Servicio REST `GET /catalan?value=n`.
-- Despliegue en al menos dos instancias EC2 para el servicio numérico.
-- Proxy en otra instancia EC2 con algoritmo round‑robin configurable por variables de entorno.
-- Cliente web HTML5 + JS que invoca el proxy de forma asíncrona.
+
+## AWS Despliegue
+
+
+<img width="1663" height="118" alt="image" src="https://github.com/user-attachments/assets/f0e4472c-2244-4392-be99-30fed45597e9" />
+
+### Proxy
+
+<img width="1686" height="774" alt="Screenshot 2026-03-25 153813" src="https://github.com/user-attachments/assets/c6c5e77e-3258-4eb6-9fb5-68f2a2d5e7c2" />
+
+## mathService1
+<img width="1639" height="771" alt="image" src="https://github.com/user-attachments/assets/3475b84b-49d5-4fa7-9c98-df728f6de5a8" />
+
+## mathService2
+<img width="1665" height="777" alt="image" src="https://github.com/user-attachments/assets/ad3b4882-1b2b-42d1-afea-4f6aace46675" />
+
+## conexión 
+
+<img width="1913" height="1035" alt="image" src="https://github.com/user-attachments/assets/25ab079c-ad9f-4b2d-bd4d-1689221b3dc2" />
+
+## Verificación 
+```http://ec2-44-211-124-58.compute-1.amazonaws.com:8080/ ``` o ```http://ec2-54-236-113-75.compute-1.amazonaws.com:8080/```
+
+<img width="1919" height="418" alt="image" src="https://github.com/user-attachments/assets/b14ec0bc-e062-49ef-916c-0bac612a9e72" />
+
+
+
