@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Math Proxy Client</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Cliente Web - Números de Catalan vía Proxy</h1>
+
+<form onsubmit="return false;">
+	<label for="value">Valor n (>= 0):</label><br>
+	<input type="number" id="value" name="value" value="10" min="0"><br><br>
+	<input type="button" value="Calcular" onclick="loadCatalan()">
+</form>
+
+<h2>Resultado</h2>
+<pre id="result"></pre>
+
+<script>
+	function loadCatalan() {
+		var value = document.getElementById("value").value;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onload = function () {
+			if (this.status === 200) {
+				document.getElementById("result").textContent = this.responseText;
+			} else {
+				document.getElementById("result").textContent = "Error: " + this.status + " - " + this.responseText;
+			}
+		};
+		xhttp.open("GET", "/catalan?value=" + encodeURIComponent(value));
+		xhttp.send();
+	}
+</script>
+
+</body>
+</html>
